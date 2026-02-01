@@ -7,7 +7,13 @@ const stadiums = [
     id: "1",
     name: "Stadium 1",
     price: "10k",
-    img: "./public/greenfield.png",
+    img: "./public/greenfield/greenfield.png",
+    subImgs: {
+      img1: "./public/greenfield/img1.jpg",
+      img2: "./public/greenfield/img2.png",
+      img3: "./public/greenfield/img3.webp",
+      img4: "./public/greenfield/img4.jpg",
+    },
     description: {
       pitchSize: "Small",
       grass: "Artificial Grass",
@@ -19,7 +25,13 @@ const stadiums = [
     id: "2",
     name: "Stadium 2",
     price: "15k",
-    img: "./public/hilltop.png",
+    img: "./public/hilltop/hilltop.png",
+    subImgs: {
+      img1: "./public/greenfield/img1.jpg",
+      img2: "./public/greenfield/img2.png",
+      img3: "./public/greenfield/img3.webp",
+      img4: "./public/greenfield/img4.jpg",
+    },
     description: {
       pitchSize: "Medium",
       grass: "Artificial Grass",
@@ -31,7 +43,13 @@ const stadiums = [
     id: "3",
     name: "Stadium 3",
     price: "20k",
-    img: "./public/meadow.png",
+    img: "./public/meadow/meadow.png",
+    subImgs: {
+      img1: "./public/greenfield/img1.jpg",
+      img2: "./public/greenfield/img2.png",
+      img3: "./public/greenfield/img3.webp",
+      img4: "./public/greenfield/img4.jpg",
+    },
     description: {
       pitchSize: "Big",
       grass: "Natural Grass",
@@ -43,7 +61,13 @@ const stadiums = [
     id: "4",
     name: "Stadium 4",
     price: "25k",
-    img: "./public/ultimate.png",
+    img: "./public/ultimate/ultimate.png",
+    subImgs: {
+      img1: "./public/greenfield/img1.jpg",
+      img2: "./public/greenfield/img2.png",
+      img3: "./public/greenfield/img3.webp",
+      img4: "./public/greenfield/img4.jpg",
+    },
     description: {
       pitchSize: "Big",
       grass: "Natural Grass",
@@ -81,10 +105,8 @@ function StadiumsView() {
             price={stadium.price}
             img={stadium.img}
             key={stadium.id}
-            pitchSize={stadium.description.pitchSize}
-            grass={stadium.description.grass}
-            lighting={stadium.description.lighning}
-            water={stadium.description.water}
+            description={stadium.description}
+            subImgs={stadium.subImgs}
           />
         );
       })}
@@ -92,7 +114,7 @@ function StadiumsView() {
   );
 }
 
-function StadSlot({ name, price, img, pitchSize, grass, lighting, water }) {
+function StadSlot({ name, price, img, description, subImgs }) {
   const [activeStadium, setActiveStadium] = useState(false);
 
   function handleActivation() {
@@ -111,27 +133,31 @@ function StadSlot({ name, price, img, pitchSize, grass, lighting, water }) {
         <Description
           img={img}
           name={name}
-          pitchSize={pitchSize}
-          grass={grass}
-          lighting={lighting}
-          water={water}
+          description={description}
+          subImgs={subImgs}
         />
       )}
     </div>
   );
 }
 
-function Description({ img, name, pitchSize, grass, lighting, water }) {
+function Description({ img, name, description, subImgs }) {
   return (
     <div className="description-pop">
       <div className="description">
-        <img className="desc-img" src={img}></img>
+        <img className="desc-img" src={img} />
+        <div className="sub-imgs">
+          <img id="sub-img1" src={subImgs.img1} />
+          <img id="sub-img2" src="" />
+          <img id="sub-img3" src="" />
+          <img id="sub-img4" src="" />
+        </div>
         <p>Details on the Stadium</p>
         <p className="desc-stad-name">Stadium {name}</p>
-        <p className="desc-pitch-size">Pitch Size: {pitchSize}</p>
-        <p className="desc-grass">Grass type: {grass}</p>
-        <p className="desc-light">Lighting: {lighting} </p>
-        <p className="desc-water">Water Availability: {water}</p>
+        <p className="desc-pitch-size">Pitch Size: {description.pitchSize}</p>
+        <p className="desc-grass">Grass type: {description.grass}</p>
+        <p className="desc-light">Lighting: {description.lighting} </p>
+        <p className="desc-water">Water Availability: {description.water}</p>
       </div>
     </div>
   );
