@@ -1,19 +1,19 @@
 import "./App.css";
-import stadiumImg1 from "./assets/stadium1.webp";
+//import stadiumImg1 from ;
 
-const data = [
+const stadiums = [
   {
     name: "Stadium 1",
     price: "10k",
-    img: { stadiumImg1 },
+    img: "./public/stadium1.webp",
   },
   {
     name: "Stadium 2",
     price: "15k",
-    img: { stadiumImg1 },
+    img: "./public/stadium1.webp",
   },
-  { name: "Stadium 3", price: "20k", img: { stadiumImg1 } },
-  { name: "Stadium 4", price: "25k", img: { stadiumImg1 } },
+  { name: "Stadium 3", price: "20k", img: "./public/stadium1.webp" },
+  { name: "Stadium 4", price: "25k", img: "./public/stadium1.webp" },
 ];
 export default function App() {
   return (
@@ -34,15 +34,29 @@ function Header() {
 }
 
 function StadiumsView() {
-  return <div className="interface"></div>;
+  return (
+    <div className="interface">
+      {stadiums.map((stadium) => {
+        return (
+          <StadSlot
+            name={stadium.name}
+            price={stadium.price}
+            img={stadium.img}
+            key={stadium.name}
+          />
+        );
+      })}
+    </div>
+  );
 }
 
-function StadSlot() {
+function StadSlot({ name, price, img }) {
   return (
     <div>
-      <p>Stadium 1</p>
-      <img src={stadiumImg1}></img>
-      <div>price : 15k per Ticket</div>
+      <p className="stad-name">Stadium {name}</p>
+      <img src={img} className="stad-img"></img>
+      <div className="stad-price">Price : {price} per Ticket</div>
+      <button className="show-button">See Details</button>
     </div>
   );
 }
