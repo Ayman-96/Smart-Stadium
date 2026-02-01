@@ -11,7 +11,7 @@ const stadiums = [
     description: {
       pitchSize: "Small",
       grass: "Artificial Grass",
-      lightning: "Normal",
+      lighting: "Normal",
       water: "Not Available",
     },
   },
@@ -23,7 +23,7 @@ const stadiums = [
     description: {
       pitchSize: "Medium",
       grass: "Artificial Grass",
-      lightning: "Good",
+      lighting: "Good",
       water: "Not Available",
     },
   },
@@ -35,7 +35,7 @@ const stadiums = [
     description: {
       pitchSize: "Big",
       grass: "Natural Grass",
-      lightning: "Normal",
+      lighting: "Normal",
       water: "Available",
     },
   },
@@ -47,7 +47,7 @@ const stadiums = [
     description: {
       pitchSize: "Big",
       grass: "Natural Grass",
-      lightning: "Very Bright",
+      lighting: "Very Bright",
       water: "Available",
     },
   },
@@ -83,7 +83,7 @@ function StadiumsView() {
             key={stadium.id}
             pitchSize={stadium.description.pitchSize}
             grass={stadium.description.grass}
-            lightning={stadium.description.lightning}
+            lighting={stadium.description.lighning}
             water={stadium.description.water}
           />
         );
@@ -92,7 +92,7 @@ function StadiumsView() {
   );
 }
 
-function StadSlot({ name, price, img, pitchSize, grass, lightning, water }) {
+function StadSlot({ name, price, img, pitchSize, grass, lighting, water }) {
   const [activeStadium, setActiveStadium] = useState(false);
 
   function handleActivation() {
@@ -109,10 +109,11 @@ function StadSlot({ name, price, img, pitchSize, grass, lightning, water }) {
       </button>
       {activeStadium && (
         <Description
+          img={img}
           name={name}
           pitchSize={pitchSize}
           grass={grass}
-          lightning={lightning}
+          lighting={lighting}
           water={water}
         />
       )}
@@ -120,17 +121,17 @@ function StadSlot({ name, price, img, pitchSize, grass, lightning, water }) {
   );
 }
 
-function Description({ name, pitchSize, grass, lightning, water }) {
+function Description({ img, name, pitchSize, grass, lighting, water }) {
   return (
     <div className="description-pop">
       <div className="description">
-        <img className="desc-img"></img>
+        <img className="desc-img" src={img}></img>
         <p>Details on the Stadium</p>
         <p className="desc-stad-name">Stadium {name}</p>
-        <p className="desc-pitch-size">Pitch Size : {pitchSize}</p>
-        <p className="desc-grass">Grass type : {grass}</p>
-        <p className="desc-light">Lightening :{lightning} </p>
-        <p className="desc-water">Water Availability : {water}</p>
+        <p className="desc-pitch-size">Pitch Size: {pitchSize}</p>
+        <p className="desc-grass">Grass type: {grass}</p>
+        <p className="desc-light">Lighting: {lighting} </p>
+        <p className="desc-water">Water Availability: {water}</p>
       </div>
     </div>
   );
