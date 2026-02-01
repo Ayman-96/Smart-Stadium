@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 //import stadiumImg1 from ;
 
@@ -6,7 +7,7 @@ const stadiums = [
     id: "1",
     name: "Stadium 1",
     price: "10k",
-    img: "./public/stadium1.webp",
+    img: "./public/greenfield.png",
     description: {
       pitchSize: "Small",
       grass: "Artificial Grass",
@@ -18,7 +19,7 @@ const stadiums = [
     id: "2",
     name: "Stadium 2",
     price: "15k",
-    img: "./public/stadium1.webp",
+    img: "./public/hilltop.png",
     description: {
       pitchSize: "Medium",
       grass: "Artificial Grass",
@@ -30,7 +31,7 @@ const stadiums = [
     id: "3",
     name: "Stadium 3",
     price: "20k",
-    img: "./public/stadium1.webp",
+    img: "./public/meadow.png",
     description: {
       pitchSize: "Big",
       grass: "Natural Grass",
@@ -42,7 +43,7 @@ const stadiums = [
     id: "4",
     name: "Stadium 4",
     price: "25k",
-    img: "./public/stadium1.webp",
+    img: "./public/ultimate.png",
     description: {
       pitchSize: "Big",
       grass: "Natural Grass",
@@ -79,7 +80,11 @@ function StadiumsView() {
             name={stadium.name}
             price={stadium.price}
             img={stadium.img}
-            key={stadium.name}
+            key={stadium.id}
+            pitchSize={stadium.description.pitchSize}
+            grass={stadium.description.grass}
+            lightning={stadium.description.lightning}
+            water={stadium.description.water}
           />
         );
       })}
@@ -87,27 +92,45 @@ function StadiumsView() {
   );
 }
 
-function StadSlot({ name, price, img }) {
+function StadSlot({ name, price, img, pitchSize, grass, lightning, water }) {
+  const [activeStadium, setActiveStadium] = useState(false);
+
+  function handleActivation() {
+    setActiveStadium((prev) => !prev);
+    console.log(activeStadium);
+  }
   return (
     <div className="slots">
       <p className="stad-name">Stadium {name}</p>
       <img src={img} className="stad-img"></img>
       <div className="stad-price">Price : {price} per Ticket</div>
-      <button className="show-button">See Details</button>
+      <button className="show-button" onClick={handleActivation}>
+        See Details
+      </button>
+      {activeStadium && (
+        <Description
+          name={name}
+          pitchSize={pitchSize}
+          grass={grass}
+          lightning={lightning}
+          water={water}
+        />
+      )}
     </div>
   );
 }
 
-function Description() {
+function Description({ name, pitchSize, grass, lightning, water }) {
   return (
     <div className="description-pop">
       <div className="description">
         <img className="desc-img"></img>
         <p>Details on the Stadium</p>
-        <p className="desc-stad-name">Stadium X</p>
-        <p className="desc-grass">Grass type : </p>
-        <p className="desc-light">Lightening : </p>
-        <p className="desc-water">Water Availability : </p>
+        <p className="desc-stad-name">Stadium {name}</p>
+        <p className="desc-pitch-size">Pitch Size : {pitchSize}</p>
+        <p className="desc-grass">Grass type : {grass}</p>
+        <p className="desc-light">Lightening :{lightning} </p>
+        <p className="desc-water">Water Availability : {water}</p>
       </div>
     </div>
   );
@@ -117,7 +140,7 @@ function Footer() {
     <div className="footer">
       <div id="left-bottom">Designed By : Ayman</div>
       <div id="center-bottom">Smart Stadium</div>
-      <div id="right-bottom">example@gmail.com</div>
+      <div id="right-bottom">aemanharde@gmail.com</div>
     </div>
   );
 }
