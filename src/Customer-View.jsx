@@ -3,17 +3,53 @@ import "./App.css";
 
 const stadiums = [
   {
+    id: "1",
     name: "Stadium 1",
     price: "10k",
     img: "./public/stadium1.webp",
+    description: {
+      pitchSize: "Small",
+      grass: "Artificial Grass",
+      lightning: "Normal",
+      water: "Not Available",
+    },
   },
   {
+    id: "2",
     name: "Stadium 2",
     price: "15k",
     img: "./public/stadium1.webp",
+    description: {
+      pitchSize: "Medium",
+      grass: "Artificial Grass",
+      lightning: "Good",
+      water: "Not Available",
+    },
   },
-  { name: "Stadium 3", price: "20k", img: "./public/stadium1.webp" },
-  { name: "Stadium 4", price: "25k", img: "./public/stadium1.webp" },
+  {
+    id: "3",
+    name: "Stadium 3",
+    price: "20k",
+    img: "./public/stadium1.webp",
+    description: {
+      pitchSize: "Big",
+      grass: "Natural Grass",
+      lightning: "Normal",
+      water: "Available",
+    },
+  },
+  {
+    id: "4",
+    name: "Stadium 4",
+    price: "25k",
+    img: "./public/stadium1.webp",
+    description: {
+      pitchSize: "Big",
+      grass: "Natural Grass",
+      lightning: "Very Bright",
+      water: "Available",
+    },
+  },
 ];
 export default function App() {
   return (
@@ -62,6 +98,20 @@ function StadSlot({ name, price, img }) {
   );
 }
 
+function Description() {
+  return (
+    <div className="description-pop">
+      <div className="description">
+        <img className="desc-img"></img>
+        <p>Details on the Stadium</p>
+        <p className="desc-stad-name">Stadium X</p>
+        <p className="desc-grass">Grass type : </p>
+        <p className="desc-light">Lightening : </p>
+        <p className="desc-water">Water Availability : </p>
+      </div>
+    </div>
+  );
+}
 function Footer() {
   return (
     <div className="footer">
