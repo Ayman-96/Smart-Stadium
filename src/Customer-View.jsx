@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import "./App.css";
 //import stadiumImg1 from ;
 
@@ -115,10 +115,11 @@ function StadiumsView() {
 }
 
 function StadSlot({ name, price, img, description, subImgs }) {
-  const [activeStadium, setActiveStadium] = useState(false);
+  const [activeDescription, setActiveDescription] = useState(false);
 
   function handleActivation() {
-    setActiveStadium((prev) => !prev);
+    setActiveDescription((prev) => !prev);
+    console.log(activeDescription);
   }
   return (
     <div className="slots">
@@ -128,22 +129,25 @@ function StadSlot({ name, price, img, description, subImgs }) {
       <button className="show-button" onClick={handleActivation}>
         See Details
       </button>
-      {activeStadium && (
+      {activeDescription && (
         <Description
           img={img}
           name={name}
           description={description}
           subImgs={subImgs}
+          handleActivation={handleActivation}
         />
       )}
     </div>
   );
 }
 
-function Description({ img, name, description, subImgs }) {
+function Description({ img, name, description, subImgs, handleActivation }) {
   return (
     <div className="description-pop">
-      <div id="step-back">X</div>
+      <button id="close-description" onClick={handleActivation}>
+        &times;
+      </button>
       <div className="description">
         <p className="desc-stad-name">{name}</p>
         <img className="desc-img" src={img} />
