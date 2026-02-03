@@ -119,11 +119,10 @@ function StadSlot({ name, price, img, description, subImgs }) {
 
   function handleActivation() {
     setActiveStadium((prev) => !prev);
-    console.log(activeStadium);
   }
   return (
     <div className="slots">
-      <p className="stad-name">Stadium {name}</p>
+      <p className="stad-name">{name}</p>
       <img src={img} className="stad-img"></img>
       <div className="stad-price">Price : {price} per Ticket</div>
       <button className="show-button" onClick={handleActivation}>
@@ -144,20 +143,23 @@ function StadSlot({ name, price, img, description, subImgs }) {
 function Description({ img, name, description, subImgs }) {
   return (
     <div className="description-pop">
+      <div id="step-back">X</div>
       <div className="description">
+        <p className="desc-stad-name">{name}</p>
         <img className="desc-img" src={img} />
         <div className="sub-imgs">
           <img id="sub-img1" src={subImgs.img1} />
-          <img id="sub-img2" src="" />
-          <img id="sub-img3" src="" />
-          <img id="sub-img4" src="" />
+          <img id="sub-img2" src={subImgs.img2} />
+          <img id="sub-img3" src={subImgs.img3} />
+          <img id="sub-img4" src={subImgs.img4} />
         </div>
-        <p>Details on the Stadium</p>
-        <p className="desc-stad-name">Stadium {name}</p>
-        <p className="desc-pitch-size">Pitch Size: {description.pitchSize}</p>
-        <p className="desc-grass">Grass type: {description.grass}</p>
-        <p className="desc-light">Lighting: {description.lighting} </p>
-        <p className="desc-water">Water Availability: {description.water}</p>
+        <div className="details">
+          <p>Details on the Stadium</p>
+          <p className="desc-pitch-size">Pitch Size: {description.pitchSize}</p>
+          <p className="desc-grass">Grass type: {description.grass}</p>
+          <p className="desc-light">Lighting: {description.lighting} </p>
+          <p className="desc-water">Water Availability: {description.water}</p>
+        </div>
       </div>
     </div>
   );

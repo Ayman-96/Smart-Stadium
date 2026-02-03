@@ -1,3 +1,160 @@
-img {
-  width: 20rem;
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  padding: 20px;
+  background: #0b3d2e;
+  color: #fff;
+}
+
+.title {
+  font-size: 32px;
+}
+
+.sub-title {
+  margin-top: 6px;
+  opacity: 0.9;
+}
+
+/* ===== STADIUM LIST ===== */
+.interface {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.slots {
+  background: #f6f6f6;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stad-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.stad-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.stad-price {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.show-button {
+  padding: 8px 14px;
+  border: none;
+  background: #0b3d2e;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.show-button:hover {
+  background: #126b4a;
+}
+
+/* ===== POPUP OVERLAY ===== */
+.description-pop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* ===== POPUP BOX ===== */
+.description {
+  background: #ffffff;
+  width: 85%;
+  max-width: 800px;
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+}
+
+/* Close Button */
+#step-back {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ===== POPUP CONTENT ===== */
+.desc-stad-name {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* MAIN IMAGE (WIDE RECTANGLE) */
+.desc-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* SUB IMAGES ROW */
+.sub-imgs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.sub-imgs img {
+  width: 25%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ===== DETAILS ===== */
+.details {
+  background: #f1f1f1;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.details p:first-child {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  background: #0b3d2e;
+  color: white;
+  margin-top: 40px;
+  font-size: 14px;
 }
