@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 //import stadiumImg1 from ;
 
@@ -80,6 +80,7 @@ export default function App() {
   return (
     <div>
       <Header />
+      <Filter />
       <StadiumsView />
       <Footer />
     </div>
@@ -95,11 +96,130 @@ function Header() {
   );
 }
 
+function Filter() {
+  const [filters, setFilters] = useState({
+    price: "",
+    pitchSize: "",
+    grass: "",
+    lighting: "",
+    waterAvailability: "",
+  });
+  // const [pitchSize, setPitchSize] = useState();
+  // const [grass, setGrass] = useState();
+  // const [lighting, setLighting] = useState();
+  // const [waterAvailability, setWaterAvailability] = useState();
+
+  const prices = ["10k", "15k", "20k", "25k"];
+  const pitchSize = ["Small", "Medium", "Big"];
+  const grassType = ["Natural Grass", "Artificial Grass"];
+  const lightingType = ["Normal", "Good", "Very Light"];
+  const waterAvailability = ["Available", "Not Available"];
+
+  function handleFiltering(e) {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value, // [name] = changed value like price or grass  : value of what we select
+    }));
+    console.log({ name, value });
+    console.log(filters.price);
+  }
+  return (
+    <div className="filtering">
+      <h2 id="filter-title">Filter Criteria :</h2>
+
+      {/* PRICE */}
+      <label className="price-label">
+        Price :
+        <select
+          name="price"
+          value={filters.price}
+          onChange={(e) => handleFiltering(e)}
+        >
+          {prices.map((price) => (
+            <option className="prices-options" value={price}>
+              {price}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/* PITCH */}
+      <label className="pitch-label">
+        Pitch Size :
+        <select
+          name="pitch size"
+          value={filters.pitchSize}
+          onChange={(e) => handleFiltering(e)}
+        >
+          {pitchSize.map((size) => (
+            <option className="sizes-options" value={size}>
+              {size}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/* GRASS */}
+      <label className="grass-label">
+        Grass Type :
+        <select
+          name="grass type"
+          value={filters.grass}
+          onChange={(e) => handleFiltering(e)}
+        >
+          {grassType.map((grass) => (
+            <option className="grasses-options" value={grass}>
+              {grass}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/* LIGHTING */}
+      <label className="lighting-label">
+        Lighting Type :
+        <select
+          name="lighting type"
+          value={filters.lighting}
+          onChange={(e) => handleFiltering(e)}
+        >
+          {lightingType.map((light) => (
+            <option className="lighting-options" value={light}>
+              {light}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/* WATER */}
+      <label className="water-label">
+        Water Type:
+        <select
+          name="water type"
+          value={filters.waterAvailability}
+          onChange={(e) => handleFiltering(e)}
+        >
+          {waterAvailability.map((water) => (
+            <option className="water-options" value={water}>
+              {water}
+            </option>
+          ))}
+        </select>
+      </label>
+    </div>
+  );
+}
+
 function StadiumsView() {
   return (
     <div className="interface">
-      {stadiums.map((stadium) => {
-        return (
+      {stadiums
+        // .filter(
+        //   (stadium) =>
+        //     stadium.description.grass.toLocaleLowerCase() === "natural grass",
+        // )
+        .map((stadium) => (
           <StadSlot
             name={stadium.name}
             price={stadium.price}
@@ -108,8 +228,7 @@ function StadiumsView() {
             description={stadium.description}
             subImgs={stadium.subImgs}
           />
-        );
-      })}
+        ))}
     </div>
   );
 }
