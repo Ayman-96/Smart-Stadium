@@ -132,7 +132,7 @@ function Filter() {
           onChange={(e) => handleFiltering(e)}
         >
           {prices.map((price) => (
-            <option className="prices-options" value={price}>
+            <option className="prices-options" value={price} key={price}>
               {price}
             </option>
           ))}
@@ -148,7 +148,7 @@ function Filter() {
           onChange={(e) => handleFiltering(e)}
         >
           {pitchSize.map((size) => (
-            <option className="sizes-options" value={size}>
+            <option className="sizes-options" value={size} key={size}>
               {size}
             </option>
           ))}
@@ -164,7 +164,7 @@ function Filter() {
           onChange={(e) => handleFiltering(e)}
         >
           {grassType.map((grass) => (
-            <option className="grasses-options" value={grass}>
+            <option className="grasses-options" value={grass} key={grass}>
               {grass}
             </option>
           ))}
@@ -180,7 +180,7 @@ function Filter() {
           onChange={(e) => handleFiltering(e)}
         >
           {lightingType.map((light) => (
-            <option className="lighting-options" value={light}>
+            <option className="lighting-options" value={light} key={light}>
               {light}
             </option>
           ))}
@@ -196,7 +196,7 @@ function Filter() {
           onChange={(e) => handleFiltering(e)}
         >
           {waterAvailability.map((water) => (
-            <option className="water-options" value={water}>
+            <option className="water-options" value={water} key={water}>
               {water}
             </option>
           ))}
