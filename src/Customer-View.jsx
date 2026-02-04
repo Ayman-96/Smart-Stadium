@@ -53,7 +53,7 @@ const stadiums = [
     description: {
       pitchSize: "Big",
       grass: "Natural Grass",
-      lighting: "Normal",
+      lighting: "Good",
       water: "Available",
     },
   },
@@ -97,22 +97,18 @@ function Header() {
 
 function Filter() {
   const [filters, setFilters] = useState({
-    price: "",
-    pitchSize: "",
-    grass: "",
-    lighting: "",
-    waterAvailability: "",
+    price: "any",
+    pitchSize: "any",
+    grass: "any",
+    lighting: "any",
+    waterAvailability: "any",
   });
-  // const [pitchSize, setPitchSize] = useState();
-  // const [grass, setGrass] = useState();
-  // const [lighting, setLighting] = useState();
-  // const [waterAvailability, setWaterAvailability] = useState();
 
-  const prices = ["10k", "15k", "20k", "25k"];
-  const pitchSize = ["Small", "Medium", "Big"];
-  const grassType = ["Artificial Grass", "Natural Grass"];
-  const lightingType = ["Normal", "Good", "Very Bright"];
-  const waterAvailability = ["Available", "Not Available"];
+  const prices = ["any", "10k", "15k", "20k", "25k"];
+  const pitchSize = ["any", "Small", "Medium", "Big"];
+  const grassType = ["any", "Artificial Grass", "Natural Grass"];
+  const lightingType = ["any", "Normal", "Good", "Very Bright"];
+  const waterAvailability = ["any", "Available", "Not Available"];
 
   function handleFiltering(e) {
     const { name, value } = e.target;
@@ -218,11 +214,16 @@ function StadiumsView({ filters }) {
       {stadiums
         .filter(
           (stadium) =>
-            stadium.price === filters.price ||
-            stadium.description.pitchSize === filters.pitchSize ||
-            stadium.description.grass === filters.grass ||
-            stadium.description.lighting === filters.lighting ||
-            stadium.description.water === filters.waterAvailability,
+            (filters.price === "any" || // Price is "any" OR stadium price matches
+              stadium.price === filters.price) &&
+            (filters.pitchSize === "any" ||
+              stadium.description.pitchSize === filters.pitchSize) &&
+            (filters.grass === "any" ||
+              stadium.description.grass === filters.grass) &&
+            (filters.lighting === "any" ||
+              stadium.description.lighting === filters.lighting) &&
+            (filters.waterAvailability === "any" ||
+              stadium.description.water === filters.waterAvailability),
         )
         .map((stadium) => (
           <StadSlot
