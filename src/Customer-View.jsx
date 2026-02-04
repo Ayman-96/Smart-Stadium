@@ -81,7 +81,6 @@ export default function App() {
     <div>
       <Header />
       <Filter />
-      <StadiumsView />
       <Footer />
     </div>
   );
@@ -111,8 +110,8 @@ function Filter() {
 
   const prices = ["10k", "15k", "20k", "25k"];
   const pitchSize = ["Small", "Medium", "Big"];
-  const grassType = ["Natural Grass", "Artificial Grass"];
-  const lightingType = ["Normal", "Good", "Very Light"];
+  const grassType = ["Artificial Grass", "Natural Grass"];
+  const lightingType = ["Normal", "Good", "Very Bright"];
   const waterAvailability = ["Available", "Not Available"];
 
   function handleFiltering(e) {
@@ -148,7 +147,7 @@ function Filter() {
       <label className="pitch-label">
         Pitch Size :
         <select
-          name="pitch size"
+          name="pitchSize"
           value={filters.pitchSize}
           onChange={(e) => handleFiltering(e)}
         >
@@ -164,7 +163,7 @@ function Filter() {
       <label className="grass-label">
         Grass Type :
         <select
-          name="grass type"
+          name="grass"
           value={filters.grass}
           onChange={(e) => handleFiltering(e)}
         >
@@ -180,7 +179,7 @@ function Filter() {
       <label className="lighting-label">
         Lighting Type :
         <select
-          name="lighting type"
+          name="lighting"
           value={filters.lighting}
           onChange={(e) => handleFiltering(e)}
         >
@@ -194,9 +193,9 @@ function Filter() {
 
       {/* WATER */}
       <label className="water-label">
-        Water Type:
+        Water Availability:
         <select
-          name="water type"
+          name="waterAvailability"
           value={filters.waterAvailability}
           onChange={(e) => handleFiltering(e)}
         >
@@ -207,18 +206,24 @@ function Filter() {
           ))}
         </select>
       </label>
+
+      <StadiumsView filters={filters} />
     </div>
   );
 }
 
-function StadiumsView() {
+function StadiumsView({ filters }) {
   return (
     <div className="interface">
       {stadiums
-        // .filter(
-        //   (stadium) =>
-        //     stadium.description.grass.toLocaleLowerCase() === "natural grass",
-        // )
+        .filter(
+          (stadium) =>
+            stadium.price === filters.price ||
+            stadium.description.pitchSize === filters.pitchSize ||
+            stadium.description.grass === filters.grass ||
+            stadium.description.lighting === filters.lighting ||
+            stadium.description.water === filters.waterAvailability,
+        )
         .map((stadium) => (
           <StadSlot
             name={stadium.name}
