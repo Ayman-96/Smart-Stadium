@@ -77,10 +77,34 @@ const stadiums = [
   },
 ];
 export default function App() {
+  const [filters, setFilters] = useState({
+    price: "any",
+    pitchSize: "any",
+    grass: "any",
+    lighting: "any",
+    waterAvailability: "any",
+  });
+  const [activeDescription, setActiveDescription] = useState(null); // ID of that slot that we want to render
+  function handleActivation(id) {
+    setActiveDescription(id);
+    console.log(activeDescription);
+  }
   return (
     <div>
       <Header />
-      <Filter />
+      <Filter filters={filters} setFilters={setFilters} />
+      <StadiumsView filters={filters} handleActivation={handleActivation} />
+      {stadiums
+        .filter((stadium) => stadium.id === activeDescription)
+        .map((stadium) => (
+          <Description
+            img={stadium.img}
+            name={stadium.name}
+            description={stadium.description}
+            subImgs={stadium.subImgs}
+            handleActivation={handleActivation}
+          />
+        ))}
       <Footer />
     </div>
   );
@@ -95,15 +119,7 @@ function Header() {
   );
 }
 
-function Filter() {
-  const [filters, setFilters] = useState({
-    price: "any",
-    pitchSize: "any",
-    grass: "any",
-    lighting: "any",
-    waterAvailability: "any",
-  });
-
+function Filter({ filters, setFilters }) {
   const prices = ["any", "10k", "15k", "20k", "25k"];
   const pitchSize = ["any", "Small", "Medium", "Big"];
   const grassType = ["any", "Artificial Grass", "Natural Grass"];
@@ -202,13 +218,11 @@ function Filter() {
           ))}
         </select>
       </label>
-
-      <StadiumsView filters={filters} />
     </div>
   );
 }
 
-function StadiumsView({ filters }) {
+function StadiumsView({ filters, handleActivation }) {
   return (
     <div className="interface">
       {stadiums
@@ -227,42 +241,27 @@ function StadiumsView({ filters }) {
         )
         .map((stadium) => (
           <StadSlot
+            id={stadium.id}
             name={stadium.name}
             price={stadium.price}
             img={stadium.img}
             key={stadium.id}
-            description={stadium.description}
-            subImgs={stadium.subImgs}
+            handleActivation={handleActivation}
           />
         ))}
     </div>
   );
 }
 
-function StadSlot({ name, price, img, description, subImgs }) {
-  const [activeDescription, setActiveDescription] = useState(false);
-
-  function handleActivation() {
-    setActiveDescription((prev) => !prev);
-    console.log(activeDescription);
-  }
+function StadSlot({ id, name, price, img, handleActivation }) {
   return (
     <div className="slots">
       <p className="stad-name">{name}</p>
       <img src={img} className="stad-img"></img>
       <div className="stad-price">Price : {price} per Ticket</div>
-      <button className="show-button" onClick={handleActivation}>
+      <button className="show-button" onClick={() => handleActivation(id)}>
         See Details
       </button>
-      {activeDescription && (
-        <Description
-          img={img}
-          name={name}
-          description={description}
-          subImgs={subImgs}
-          handleActivation={handleActivation}
-        />
-      )}
     </div>
   );
 }
@@ -270,7 +269,7 @@ function StadSlot({ name, price, img, description, subImgs }) {
 function Description({ img, name, description, subImgs, handleActivation }) {
   return (
     <div className="description-pop">
-      <button id="close-description" onClick={handleActivation}>
+      <button id="close-description" onClick={() => handleActivation(null)}>
         &times;
       </button>
       <div className="description">
